@@ -17,8 +17,12 @@
 
   <ItemGroup>
     <ProjectReference Include="..\FlightManager.Data\FlightManager.Data.csproj" />
-    <ProjectReference Include="..\FlightManager.Domain\FlightManager.Domain.csproj" />
     <ProjectReference Include="..\FlightManager.Services\FlightManager.Services.csproj" />
+  </ItemGroup>
+
+
+  <ItemGroup>
+    <Folder Include="ViewModels\Flight\" />
   </ItemGroup>
 
 </Project>

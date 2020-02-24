@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using FlightManager.Data;
 using FlightManager.Domain;
+using FlightManager.Services;
 using FlightManager.Services.EmailSender;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Identity;
@@ -49,9 +50,11 @@ namespace FlightManager.Web
                 .AddRoles<IdentityRole>()
                 .AddEntityFrameworkStores<FlightManagerDbContext>();
 
-            services.AddTransient<IEmailSender, EmailSender>();
             services.AddControllersWithViews();
             services.AddRazorPages();
+
+            services.AddTransient<IEmailSender, EmailSender>();
+            services.AddTransient<IFlightService, FlightService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

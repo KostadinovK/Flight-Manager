@@ -1,14 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using System.Text;
 
-namespace FlightManager.Domain
+namespace FlightManager.Web.BindingModels.Flight
 {
-    public class Flight
+    public class Create
     {
-        public string Id { get; set; } = Guid.NewGuid().ToString();
-
         [Required]
         [MaxLength(30)]
         public string From { get; set; }
@@ -18,14 +15,14 @@ namespace FlightManager.Domain
         public string To { get; set; }
 
         [Required]
-        public DateTime DepartureTime { get; set; }
+        public string DepartureTime { get; set; }
 
         [Required]
-        public DateTime ArrivalTime { get; set; }
+        public string ArrivalTime { get; set; }
 
         [Required]
         public string PlaneType { get; set; }
-        
+
         [Required]
         public string PlaneNumber { get; set; }
 
@@ -42,7 +39,5 @@ namespace FlightManager.Domain
         public int FreeBusinessSeats { get; set; }
 
         public string Image { get; set; }
-
-        public ICollection<Reservation> Reservations { get; set; } = new HashSet<Reservation>();
     }
 }
