@@ -11,12 +11,12 @@
                 <a class="nav-link text-dark" asp-area="Identity" asp-page="/Account/Manage/Index" title="Manage">Hello @User.Identity.Name!</a>
             </li>
 
-            <li class="nav-item">
-                <a class="nav-link text-dark" asp-controller="Flight" asp-action="Create" title="Manage">Create Flight</a>
-            </li>
-
             @if (User.IsInRole("Admin"))
             {
+                <li class="nav-item">
+                    <a class="nav-link text-dark" asp-controller="Flight" asp-action="Create" title="Manage">Create Flight</a>
+                </li>
+
                 <li class="nav-item">
                     <a class="nav-link text-dark" asp-area="Identity" asp-page="/Account/Register">Register User</a>
                 </li>

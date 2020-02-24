@@ -1,7 +1,11 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using FlightManager.Common;
 using FlightManager.Data;
 using FlightManager.Domain;
 using FlightManager.Services.Models;
+using Microsoft.EntityFrameworkCore;
 
 namespace FlightManager.Services
 {
@@ -32,6 +36,20 @@ namespace FlightManager.Services
 
             context.Flights.Add(flight);
             context.SaveChanges();
+        }
+
+        public int GetCount()
+        {
+            return context.Flights.Count();
+        }
+
+        public IEnumerable<Flight> GetAll(int page)
+        {
+            return context.Flights
+                .OrderByDescending(f => f.DepartureTime)
+                .Take(page * GlobalConstants.FlightsPerPage)
+                .Skip((page - 1) * GlobalConstants.FlightsPerPage)
+                .ToList();
         }
     }
 }

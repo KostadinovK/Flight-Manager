@@ -3,13 +3,15 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.29709.97
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FlightManager.Web", "FlightManager.Web\FlightManager.Web.csproj", "{D8FE1091-290F-4045-81F9-27FE4D9710BB}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FlightManager.Web", "FlightManager.Web\FlightManager.Web.csproj", "{D8FE1091-290F-4045-81F9-27FE4D9710BB}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FlightManager.Domain", "FlightManager.Domain\FlightManager.Domain.csproj", "{D820878D-3629-4EF3-B2D3-401D5DC95CBF}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FlightManager.Domain", "FlightManager.Domain\FlightManager.Domain.csproj", "{D820878D-3629-4EF3-B2D3-401D5DC95CBF}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FlightManager.Data", "FlightManager.Data\FlightManager.Data.csproj", "{81C66215-9803-4F21-8099-4ABECE5B9A50}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FlightManager.Data", "FlightManager.Data\FlightManager.Data.csproj", "{81C66215-9803-4F21-8099-4ABECE5B9A50}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FlightManager.Services", "FlightManager.Services\FlightManager.Services.csproj", "{09AC86CA-D6D5-4C1D-8426-F79C7541B18B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FlightManager.Services", "FlightManager.Services\FlightManager.Services.csproj", "{09AC86CA-D6D5-4C1D-8426-F79C7541B18B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FlightManager.Common", "FlightManager.Common\FlightManager.Common.csproj", "{BCF14E7F-2B65-4EC4-9B81-BFE86CC9D6C6}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -33,6 +35,10 @@ Global
 		{09AC86CA-D6D5-4C1D-8426-F79C7541B18B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{09AC86CA-D6D5-4C1D-8426-F79C7541B18B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{09AC86CA-D6D5-4C1D-8426-F79C7541B18B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BCF14E7F-2B65-4EC4-9B81-BFE86CC9D6C6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BCF14E7F-2B65-4EC4-9B81-BFE86CC9D6C6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BCF14E7F-2B65-4EC4-9B81-BFE86CC9D6C6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BCF14E7F-2B65-4EC4-9B81-BFE86CC9D6C6}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <TargetFramework>netcoreapp3.1</TargetFramework>
@@ -9,6 +9,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\FlightManager.Common\FlightManager.Common.csproj" />
     <ProjectReference Include="..\FlightManager.Data\FlightManager.Data.csproj" />
     <ProjectReference Include="..\FlightManager.Domain\FlightManager.Domain.csproj" />
   </ItemGroup>

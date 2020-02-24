@@ -2,9 +2,12 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using FlightManager.Common;
 using FlightManager.Services;
 using FlightManager.Services.Models;
 using FlightManager.Web.BindingModels.Flight;
+using FlightManager.Web.ViewModels.Flight;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace FlightManager.Web.Controllers
@@ -18,11 +21,13 @@ namespace FlightManager.Web.Controllers
             this.flightService = flightService;
         }
 
+        [Authorize(Roles = "Admin")]
         public IActionResult Create(Input input)
         {
             return View(input);
         }
 
+        [Authorize(Roles = "Admin")]
         [HttpPost]
         public IActionResult Create(Create input)
         {
@@ -67,6 +72,59 @@ namespace FlightManager.Web.Controllers
             flightService.Create(flight);
 
             return Redirect("/Home/Index");
+        }
+
+        public IActionResult GetAll(int page)
+        {
+            if (page <= 0)
+            {
+                return Redirect("/Home/Index");
+            }
+
+            int flightsCount = flightService.GetCount();
+
+            var lastPage = flightsCount / GlobalConstants.FlightsPerPage + 1;
+
+            if (flightsCount % GlobalConstants.FlightsPerPage == 0)
+            {
+                lastPage--;
+            }
+
+            if (page > lastPage)
+            {
+                return Redirect("/Home/Index");
+            }
+
+            var flights = flightService.GetAll(page);
+
+            var viewModel = new ListingPageViewModel
+            {
+                CurrentPage = page,
+                TotalFlightsCount = flightsCount,
+                LastPage = lastPage,
+                Flights = new List<ListingViewModel>()
+            };
+
+            foreach (var flight in flights)
+            {
+                TimeSpan span = (flight.ArrivalTime - flight.DepartureTime);
+
+                var travelTime = String.Format("{0} days/{1} hours/{2} minutes",
+                    span.Days, span.Hours, span.Minutes, span.Seconds);
+
+                viewModel.Flights.Add(new ListingViewModel()
+                {
+                    From = flight.From,
+                    DepartureTime = flight.DepartureTime.ToString("MM/dd/yyyy hh:mm tt"),
+                    To = flight.To,
+                    Id = flight.Id,
+                    TravelTime = travelTime,
+                    FreePassengersSeats = flight.FreePassengersSeats,
+                    FreeBusinessSeats = flight.FreeBusinessSeats
+                });
+            }
+
+            return View(viewModel);
         }
     }
 }
