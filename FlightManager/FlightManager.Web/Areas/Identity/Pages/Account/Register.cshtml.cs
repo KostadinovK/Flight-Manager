@@ -104,12 +104,10 @@ namespace FlightManager.Web.Areas.Identity.Pages.Account
             if (ModelState.IsValid)
             {
                 var user = new User { UserName = Input.Username, Email = Input.Email, FirstName = Input.FirstName, LastName = Input.SecondName, EGN = Input.EGN, Address = Input.Address, PhoneNumber = Input.PhoneNumber};
-               
+                var isRoot = !_userManager.Users.Any();
                 var result = await _userManager.CreateAsync(user, Input.Password);
                 if (result.Succeeded)
                 {
-                    var isRoot = !_userManager.Users.Any();
-
                     if (isRoot)
                     {
                         await _userManager.AddToRoleAsync(user, "Admin");
