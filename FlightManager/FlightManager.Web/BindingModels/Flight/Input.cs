@@ -8,6 +8,8 @@ namespace FlightManager.Web.BindingModels.Flight
 {
     public class Input
     {
+        public string Id { get; set; }
+
         [Required]
         [MaxLength(30)]
         public string From { get; set; }

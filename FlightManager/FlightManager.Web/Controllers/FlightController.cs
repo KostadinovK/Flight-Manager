@@ -7,6 +7,7 @@ using FlightManager.Services;
 using FlightManager.Services.Models;
 using FlightManager.Web.BindingModels.Flight;
 using FlightManager.Web.ViewModels.Flight;
+using FlightManager.Web.ViewModels.Reservation;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
@@ -15,10 +16,12 @@ namespace FlightManager.Web.Controllers
     public class FlightController : Controller
     {
         private IFlightService flightService;
+        private IReservationService reservationService;
 
-        public FlightController(IFlightService flightService)
+        public FlightController(IFlightService flightService, IReservationService reservationService)
         {
             this.flightService = flightService;
+            this.reservationService = reservationService;
         }
 
         [Authorize(Roles = "Admin")]
@@ -55,7 +58,7 @@ namespace FlightManager.Web.Controllers
                 return Redirect("/Flight/Create");
             }
 
-            var flight = new CreateFlightServiceModel
+            var flight = new FlightServiceModel
             {
                 From = input.From,
                 To = input.To,
@@ -115,7 +118,7 @@ namespace FlightManager.Web.Controllers
                 viewModel.Flights.Add(new ListingViewModel()
                 {
                     From = flight.From,
-                    DepartureTime = flight.DepartureTime.ToString("MM/dd/yyyy hh:mm tt"),
+                    DepartureTime = flight.DepartureTime.ToString(GlobalConstants.DateTimeFormat),
                     To = flight.To,
                     Id = flight.Id,
                     TravelTime = travelTime,
@@ -125,6 +128,140 @@ namespace FlightManager.Web.Controllers
             }
 
             return View(viewModel);
+        }
+
+        [Authorize(Roles = "Admin")]
+        public IActionResult Details(string id)
+        {
+            if (!flightService.HasWithId(id))
+            {
+                return Redirect("/Flight/GetAll?page=1");
+            }
+
+            var flight = flightService.GetById(id);
+            var reservations = reservationService.GetAllByFlightId(flight.Id);
+
+            var viewModel = new DetailsViewModel()
+            {
+                Id = flight.Id,
+                ArrivalTime = flight.ArrivalTime.ToString(GlobalConstants.DateTimeFormat),
+                DepartureTime = flight.DepartureTime.ToString(GlobalConstants.DateTimeFormat),
+                FreePassengersSeats = flight.FreePassengersSeats,
+                FreeBusinessSeats = flight.FreeBusinessSeats,
+                From = flight.From,
+                Image = flight.Image,
+                PilotName = flight.PilotName,
+                PlaneNumber = flight.PlaneNumber,
+                To = flight.To,
+                PlaneType = flight.PlaneType
+            };
+
+            foreach (var reservation in reservations)
+            {
+                viewModel.Passengers.Add(new PassengerViewModel
+                {
+                    EGN = reservation.EGN,
+                    Email = reservation.Email,
+                    FirstName = reservation.FirstName,
+                    LastName = reservation.LastName,
+                    Nationality = reservation.Nationality,
+                    PhoneNumber = reservation.PhoneNumber,
+                    SecondName = reservation.SecondName,
+                    TicketType = reservation.TicketType.ToString()
+                });
+            }
+
+            return View(viewModel);
+        }
+
+        [Authorize(Roles = "Admin")]
+        public IActionResult Delete(string id)
+        {
+            if (!flightService.HasWithId(id))
+            {
+                return Redirect("/Flight/GetAll?page=1");
+            }
+
+            flightService.DeleteById(id);
+
+            return Redirect("/Flight/GetAll?page=1");
+        }
+
+        [Authorize(Roles = "Admin")]
+        public IActionResult Edit(string id)
+        {
+            if (!flightService.HasWithId(id))
+            {
+                return Redirect("/Flight/GetAll?page=1");
+            }
+
+            var flight = flightService.GetById(id);
+
+            var viewModel = new DetailsViewModel()
+            {
+                Id = flight.Id,
+                ArrivalTime = flight.ArrivalTime.ToString(GlobalConstants.DateTimeFormat),
+                DepartureTime = flight.DepartureTime.ToString(GlobalConstants.DateTimeFormat),
+                FreePassengersSeats = flight.FreePassengersSeats,
+                FreeBusinessSeats = flight.FreeBusinessSeats,
+                From = flight.From,
+                Image = flight.Image,
+                PilotName = flight.PilotName,
+                PlaneNumber = flight.PlaneNumber,
+                To = flight.To,
+                PlaneType = flight.PlaneType
+            };
+
+            return View(viewModel);
+        }
+
+
+        [Authorize(Roles = "Admin")]
+        [HttpPost]
+        public IActionResult Edit(Input input)
+        {
+            if (!ModelState.IsValid)
+            {
+                return Redirect($"/Flight/Edit?id={input.Id}");
+            }
+
+            var departureTime = new DateTime();
+
+            if (!DateTime.TryParse(input.DepartureTime, out departureTime))
+            {
+                return Redirect($"/Flight/Edit?id={input.Id}");
+            }
+
+            var arrivalTime = new DateTime();
+
+            if (!DateTime.TryParse(input.ArrivalTime, out arrivalTime))
+            {
+                return Redirect($"/Flight/Edit?id={input.Id}");
+            }
+
+            if (arrivalTime < departureTime)
+            {
+                return Redirect($"/Flight/Edit?id={input.Id}");
+            }
+
+            var flight = new FlightServiceModel
+            {
+                Id = input.Id,
+                From = input.From,
+                To = input.To,
+                ArrivalTime = arrivalTime,
+                DepartureTime = departureTime,
+                FreePassengersSeats = input.FreePassengersSeats,
+                FreeBusinessSeats = input.FreeBusinessSeats,
+                PlaneNumber = input.PlaneNumber,
+                PlaneType = input.PlaneType,
+                Image = input.Image,
+                PilotName = input.PilotName
+            };
+
+            flightService.Edit(flight);
+
+            return Redirect("/Flight/GetAll?page=1");
         }
     }
 }

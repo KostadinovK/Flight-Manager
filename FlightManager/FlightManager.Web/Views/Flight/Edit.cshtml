@@ -1,0 +1,62 @@
+﻿@model FlightManager.Web.ViewModels.Flight.DetailsViewModel
+<section class="py-5">
+    <div class="container">
+        <h1 style="margin: 2%; text-align: center;">Edit Flight</h1>
+        <form method="post" action="/Flight/Edit">
+            <div>
+                <div class="form-group">
+                    <label for="image">Image</label>
+                    <input type="text" class="form-control" id="image" name="Image" value="@Model.Image">
+                </div>
+
+                <div class="form-group">
+                    <label for="from">From</label>
+                    <input type="text" class="form-control" id="from" name="From" value="@Model.From">
+                </div>
+                <div class="form-group">
+                    <label for="to">To</label>
+                    <input type="text" class="form-control" id="to" name="To" value="@Model.To">
+                </div>
+                <div class="form-group">
+                    <label for="departureTime">Departure Time</label>
+                    <input type="text" class="form-control" id="departureTime" name="DepartureTime" value="@Model.DepartureTime">
+                </div>
+                <div class="form-group">
+                    <label for="arrivalTime">Arrival Time</label>
+                    <input type="text" class="form-control" id="arrivalTime" name="ArrivalTime" value="@Model.ArrivalTime">
+                </div>
+                <div class="form-group">
+                    <label for="seats">Passengers Seats</label>
+                    <input type="number" class="form-control" id="seats" name="FreePassengersSeats" value="@Model.FreePassengersSeats">
+                </div>
+                <div class="form-group">
+                    <label for="businessSeats">Business Seats</label>
+                    <input type="number" class="form-control" id="businessSeats" name="FreeBusinessSeats" value="@Model.FreeBusinessSeats">
+                </div>
+                <div class="form-group">
+                    <label for="planeNumber">Plane Number</label>
+                    <input type="text" class="form-control" id="planeNumber" name="PlaneNumber" value="@Model.PlaneNumber">
+                </div>
+                <div class="form-group">
+                    <label for="planeType">Plane Type</label>
+                    <input type="text" class="form-control" id="planeType" name="PlaneType" value="@Model.PlaneType">
+                </div>
+
+                <div class="form-group">
+                    <label for="pilotName">Pilot Name</label>
+                    <input type="text" class="form-control" id="pilotName" name="PilotName" value="@Model.PilotName">
+                </div>
+                <div class="form-group" style="display: none">
+                    <input type="text" class="form-control" id="id" name="Id" value="@Model.Id">
+                </div>
+                <div class="form-group text-center">
+                    @if (User.IsInRole("Admin"))
+                    {
+                        <button type="submit" class="btn btn-primary">Edit</button>
+                    }
+                </div>
+            </div>
+        </form>
+        
+    </div>
+</section>

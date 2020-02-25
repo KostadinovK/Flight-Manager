@@ -5,8 +5,10 @@ using System.Text;
 
 namespace FlightManager.Services.Models
 {
-    public class CreateFlightServiceModel
+    public class FlightServiceModel
     {
+
+        public string Id { get; set; }
         public string From { get; set; }
 
         public string To { get; set; }

@@ -18,7 +18,7 @@ namespace FlightManager.Services
             this.context = context;
         }
 
-        public void Create(CreateFlightServiceModel input)
+        public void Create(FlightServiceModel input)
         {
             var flight = new Flight
             {
@@ -50,6 +50,60 @@ namespace FlightManager.Services
                 .Take(page * GlobalConstants.FlightsPerPage)
                 .Skip((page - 1) * GlobalConstants.FlightsPerPage)
                 .ToList();
+        }
+
+        public bool HasWithId(string id)
+        {
+            return context.Flights.Any(f => f.Id == id);
+        }
+
+        public Flight GetById(string id)
+        {
+            if (!HasWithId(id))
+            {
+                throw new ArgumentException("Invalid flight id!");
+            }
+
+            var flight = context.Flights.SingleOrDefault(f => f.Id == id);
+
+            return flight;
+        }
+
+        public void DeleteById(string id)
+        {
+            if (!HasWithId(id))
+            {
+                throw new ArgumentException("Invalid flight id!");
+            }
+
+            var flight = context.Flights.SingleOrDefault(f => f.Id == id);
+
+            context.Flights.Remove(flight);
+            context.SaveChanges();
+        }
+
+        public void Edit(FlightServiceModel flight)
+        {
+            if (!HasWithId(flight.Id))
+            {
+                throw new ArgumentException("Invalid flight id!");
+            }
+
+            var flightFromDb = context.Flights.SingleOrDefault(f => f.Id == flight.Id);
+
+            flightFromDb.From = flight.From;
+            flightFromDb.To = flight.To;
+            flightFromDb.ArrivalTime = flight.ArrivalTime;
+            flightFromDb.DepartureTime = flight.DepartureTime;
+            flightFromDb.FreePassengersSeats = flight.FreePassengersSeats;
+            flightFromDb.FreeBusinessSeats = flight.FreeBusinessSeats;
+            flightFromDb.PlaneNumber = flight.PlaneNumber;
+            flightFromDb.PlaneType = flight.PlaneType;
+            flightFromDb.Image = flight.Image;
+            flightFromDb.PilotName = flight.PilotName;
+
+            context.Flights.Update(flightFromDb);
+            context.SaveChanges();
         }
     }
 }

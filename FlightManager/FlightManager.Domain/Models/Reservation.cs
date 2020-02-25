@@ -32,6 +32,10 @@ namespace FlightManager.Domain
         public string PhoneNumber { get; set; }
 
         [Required]
+        [EmailAddress]
+        public string Email { get; set; }
+
+        [Required]
         [MaxLength(50)]
         public string Nationality { get; set; }
 
