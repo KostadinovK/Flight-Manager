@@ -17,7 +17,15 @@
             </p>
         </div>
         <div>
-            <a href="/Flight/GetAll?page=1" class="btn btn-primary text-center">View All Flights</a>
+            <a href="/Flight/GetAll?page=1" class="btn btn-primary text-center mb-2">View All Flights</a>
+
         </div>
+        @if (User.IsInRole("Admin"))
+        {
+        <div>
+            <a href="/User/All?page=1&showBy=10&orderBy=usernameAsc" class="btn btn-primary text-center mb-2">View All Users</a>
+        </div>
+
+        }
     </div>
 </section>

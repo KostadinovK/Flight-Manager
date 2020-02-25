@@ -88,7 +88,7 @@ namespace FlightManager.Web.Controllers
 
             var lastPage = flightsCount / GlobalConstants.FlightsPerPage + 1;
 
-            if (flightsCount % GlobalConstants.FlightsPerPage == 0)
+            if (flightsCount % GlobalConstants.FlightsPerPage == 0 && lastPage > 1)
             {
                 lastPage--;
             }
