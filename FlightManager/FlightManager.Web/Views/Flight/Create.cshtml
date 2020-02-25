@@ -12,23 +12,23 @@
         <form action="/Flight/Create" method="post">
             <div asp-validation-summary="All" class="text-danger"></div>
             <div class="form-group">
-                <input asp-for="Image" class="form-control common-input mt-20" placeholder="Image" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Image'" required />
+                <input asp-for="Image" class="form-control common-input mt-20" placeholder="Image" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Image'" required/>
                 <span asp-validation-for="Image" class="text-dark"></span>
             </div>
             <div class="form-group">
-                <input asp-for="From" class="form-control common-input mt-20" placeholder="From" onfocus="this.placeholder = ''" onblur="this.placeholder = 'From*'" required />
+                <input asp-for="From" class="form-control common-input mt-20" placeholder="From" onfocus="this.placeholder = ''" onblur="this.placeholder = 'From*'" required/>
                 <span asp-validation-for="From" class="text-dark"></span>
             </div>
             <div class="form-group">
-                <input asp-for="To" class="form-control common-input mt-20" placeholder="To" onfocus="this.placeholder = ''" onblur="this.placeholder = 'To*'" required />
+                <input asp-for="To" class="form-control common-input mt-20" placeholder="To" onfocus="this.placeholder = ''" onblur="this.placeholder = 'To*'" required/>
                 <span asp-validation-for="To" class="text-dark"></span>
             </div>
             <div class="form-group">
-                <input asp-for="DepartureTime" class="form-control common-input mt-20" placeholder="Departure Time - MM/dd/yyyy hh::mm" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Departure Time - MM/dd/yyyy hh::mm'" required />
+                <input asp-for="DepartureTime" class="form-control common-input mt-20" placeholder="Departure Time - MM/dd/yyyy hh::mm" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Departure Time - MM/dd/yyyy hh::mm'" required/>
                 <span asp-validation-for="DepartureTime" class="text-dark"></span>
             </div>
             <div class="form-group">
-                <input asp-for="ArrivalTime" class="form-control common-input mt-20"  placeholder="Arrival Time - MM/dd/yyyy hh::mm" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Arrival Time - MM/dd/yyyy hh::mm'" required />
+                <input asp-for="ArrivalTime" class="form-control common-input mt-20" placeholder="Arrival Time - MM/dd/yyyy hh::mm" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Arrival Time - MM/dd/yyyy hh::mm'" required/>
                 <span asp-validation-for="ArrivalTime" class="text-dark"></span>
             </div>
             <div class="form-group">
@@ -39,16 +39,16 @@
                 </select>
             </div>
             <div class="form-group">
-                <input asp-for="PlaneNumber" class="form-control common-input mt-20" placeholder="Plane Number" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Plane Number*'" required />
+                <input asp-for="PlaneNumber" class="form-control common-input mt-20" placeholder="Plane Number" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Plane Number*'" required/>
                 <span asp-validation-for="PlaneNumber" class="text-dark"></span>
             </div>
             <div class="form-group">
-                <input asp-for="PilotName" class="form-control common-input mt-20" placeholder="Pilot Name" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Pilot Name*'" required />
+                <input asp-for="PilotName" class="form-control common-input mt-20" placeholder="Pilot Name" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Pilot Name*'" required/>
                 <span asp-validation-for="PilotName" class="text-dark"></span>
             </div>
             <div class="form-group">
                 <label asp-for="FreePassengersSeats">Passengers Seats</label>
-                <input asp-for="FreePassengersSeats" class="form-control common-input mt-20" placeholder="Passengers Seats" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Passengers Seats*'" required />
+                <input asp-for="FreePassengersSeats" class="form-control common-input mt-20" placeholder="Passengers Seats" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Passengers Seats*'" required/>
                 <span asp-validation-for="FreePassengersSeats" class="text-dark"></span>
             </div>
             <div class="form-group">
@@ -57,7 +57,7 @@
                 <span asp-validation-for="FreeBusinessSeats" class="text-dark"></span>
             </div>
             <div class="form-group">
-                <input type="submit" value="Create" class="btn btn-primary" />
+                <input type="submit" value="Create" class="btn btn-primary"/>
             </div>
         </form>
     </div>

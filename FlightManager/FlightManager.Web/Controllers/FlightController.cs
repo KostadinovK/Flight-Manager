@@ -1,7 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using FlightManager.Common;
 using FlightManager.Services;
 using FlightManager.Services.Models;
@@ -32,7 +30,7 @@ namespace FlightManager.Web.Controllers
 
         [Authorize(Roles = "Admin")]
         [HttpPost]
-        public IActionResult Create(Create input)
+        public IActionResult Create(CreateBindingModel input)
         {
             if (!ModelState.IsValid)
             {
@@ -100,7 +98,7 @@ namespace FlightManager.Web.Controllers
 
             var flights = flightService.GetAll(page);
 
-            var viewModel = new ListingPageViewModel
+            var viewModel = new FlightManager.Web.ViewModels.Flight.ListingPageViewModel
             {
                 CurrentPage = page,
                 TotalFlightsCount = flightsCount,
@@ -130,7 +128,6 @@ namespace FlightManager.Web.Controllers
             return View(viewModel);
         }
 
-        [Authorize(Roles = "Admin")]
         public IActionResult Details(string id)
         {
             if (!flightService.HasWithId(id))
@@ -158,7 +155,7 @@ namespace FlightManager.Web.Controllers
 
             foreach (var reservation in reservations)
             {
-                viewModel.Passengers.Add(new PassengerViewModel
+                viewModel.Passengers.Add(new ReservationViewModel
                 {
                     EGN = reservation.EGN,
                     Email = reservation.Email,
@@ -167,7 +164,8 @@ namespace FlightManager.Web.Controllers
                     Nationality = reservation.Nationality,
                     PhoneNumber = reservation.PhoneNumber,
                     SecondName = reservation.SecondName,
-                    TicketType = reservation.TicketType.ToString()
+                    TicketType = reservation.TicketType.ToString(),
+                    TicketsCount = reservation.TicketsCount
                 });
             }
 

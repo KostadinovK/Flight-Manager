@@ -4,7 +4,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace FlightManager.Web.BindingModels.Flight
 {
-    public class Create
+    public class CreateBindingModel
     {
         [Required]
         [MaxLength(30)]

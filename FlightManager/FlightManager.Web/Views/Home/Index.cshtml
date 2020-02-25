@@ -27,5 +27,12 @@
         </div>
 
         }
+
+        @if (User.IsInRole("Admin") || User.IsInRole("User"))
+        {
+            <div>
+                <a href="/Reservation/All?page=1" class="btn btn-primary text-center mb-2">View All Reservations</a>
+            </div>
+        }
     </div>
 </section>

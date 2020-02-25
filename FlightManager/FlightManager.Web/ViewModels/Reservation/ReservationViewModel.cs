@@ -5,8 +5,9 @@ using System.Threading.Tasks;
 
 namespace FlightManager.Web.ViewModels.Reservation
 {
-    public class PassengerViewModel
+    public class ReservationViewModel
     {
+        public string Id { get; set; }
         public string FirstName { get; set; }
 
         public string SecondName { get; set; }
@@ -22,5 +23,9 @@ namespace FlightManager.Web.ViewModels.Reservation
         public string Nationality { get; set; }
 
         public string TicketType { get; set; }
+
+        public int TicketsCount { get; set; }
+
+        public bool IsConfirmed { get; set; }
     }
 }

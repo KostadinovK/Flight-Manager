@@ -43,28 +43,30 @@
                 <label for="pilotName">Pilot Name</label>
                 <input type="text" readonly class="form-control" id="pilotName" name="PilotName" value="@Model.PilotName">
             </div>
-
-            <h3 class="text-center">Passengers</h3>
-            @if (Model.Passengers.Count == 0)
+            @if (User.IsInRole("User") || User.IsInRole("Admin"))
             {
-                <p class="text-center mb-4">No Passengers yet...</p>
-            }
-            else
-            {
-                <table class="table">
-                    <thead class="thead-dark">
-                        <tr>
-                            <th scope="col">First Name</th>
-                            <th scope="col">Second Name</th>
-                            <th scope="col">Last Name</th>
-                            <th scope="col">EGN</th>
-                            <th scope="col">Email</th>
-                            <th scope="col">Nationality</th>
-                            <th scope="col">PhoneNumber</th>
-                            <th scope="col">Ticket Type</th>
-                        </tr>
-                    </thead>
-                    <tbody>
+                <h3 class="text-center">Passengers</h3>
+                @if (Model.Passengers.Count == 0)
+                {
+                    <p class="text-center mb-4">No Passengers yet...</p>
+                }
+                else
+                {
+                    <table class="table">
+                        <thead class="thead-dark">
+                            <tr>
+                                <th scope="col">First Name</th>
+                                <th scope="col">Second Name</th>
+                                <th scope="col">Last Name</th>
+                                <th scope="col">EGN</th>
+                                <th scope="col">Email</th>
+                                <th scope="col">Nationality</th>
+                                <th scope="col">PhoneNumber</th>
+                                <th scope="col">Ticket Type</th>
+                                <th scope="col">Tickets</th>
+                            </tr>
+                        </thead>
+                        <tbody>
                         @foreach (var reservation in Model.Passengers)
                         {
                             <tr>
@@ -76,14 +78,15 @@
                                 <td>@reservation.Nationality</td>
                                 <td>@reservation.PhoneNumber</td>
                                 <td>@reservation.TicketType</td>
+                                <td>@reservation.TicketsCount</td>
                             </tr>
                         }
 
-                    </tbody>
+                        </tbody>
 
-                </table>
+                    </table>
+                }
             }
-
 
             <div class="form-group text-center">
                 @if (User.IsInRole("Admin"))
@@ -96,7 +99,7 @@
                     </div>
                 }
                 <div class="button-holder mb-2">
-                    <a href="/Flight/AddUserToTrip?tripId=@Model.Id" class="btn btn-primary text-uppercase">Make Reservation</a>
+                    <a href="/Reservation/Make?id=@Model.Id" class="btn btn-primary text-uppercase">Make Reservation</a>
                 </div>
             </div>
         </div>

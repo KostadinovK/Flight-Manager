@@ -1,14 +1,15 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using System.Text;
+using System.Linq;
+using System.Threading.Tasks;
 using FlightManager.Domain.Enums;
 
-namespace FlightManager.Domain
+namespace FlightManager.Web.BindingModels.Reservation
 {
-    public class Reservation
+    public class CreateBindingModel
     {
-        public string Id { get; set; } = Guid.NewGuid().ToString();
+        public string FlightId { get; set; }
 
         [Required]
         [MaxLength(30)]
@@ -45,11 +46,5 @@ namespace FlightManager.Domain
         [Required]
         [Range(1, 100)]
         public int TicketsCount { get; set; }
-
-        public bool IsConfirmed { get; set; } = false;
-
-        public string FlightId { get; set; }
-
-        public Flight Flight { get; set; }
     }
 }

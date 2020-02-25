@@ -30,6 +30,6 @@ namespace FlightManager.Web.ViewModels.Flight
 
         public string PlaneType { get; set; }
 
-        public List<PassengerViewModel> Passengers { get; set; } = new List<PassengerViewModel>();
+        public List<ReservationViewModel> Passengers { get; set; } = new List<ReservationViewModel>();
     }
 }
